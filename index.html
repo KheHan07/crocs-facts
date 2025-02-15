@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Fun Facts Generator</title>
+    <style>
+        body {
+            font-family: 'Impact', 'Haettenschweiler', 'Arial Narrow Bold', sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #f0f0f0; /* Light background for contrast */
+        }
+
+        #fact-display {
+            margin: 20px;
+            font-size: 18px;
+            color: navy; /* Navy blue color */
+            padding: 20px;
+            border: 2px solid navy;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+            max-width: 80%; /* Prevent overflow */
+            overflow-wrap: break-word; /* Ensure text wraps */
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: navy; /* Navy blue button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+            transition: transform 0.2s; /* Smooth transition for movement */
+        }
+    </style>
+</head>
+<body>
+    <h1>Fun Facts Generator</h1>
+    <div id="fact-display">Click the button to see a fun fact!</div>
+    <button id="fact-button">Generate Another Fun Fact</button>
+
+    <script>
+        let attempts = 0;
+        const button = document.getElementById('fact-button');
+        const factDisplay = document.getElementById('fact-display');
+
+        button.addEventListener('mouseover', () => {
+            if (attempts < 3) {
+                // Move the button randomly within the viewport
+                const x = Math.random() * (window.innerWidth - button.offsetWidth);
+                const y = Math.random() * (window.innerHeight - button.offsetHeight);
+                button.style.position = 'absolute';
+                button.style.left = `${x}px`;
+                button.style.top = `${y}px`;
+                attempts++;
+            }
+        });
+
+        button.addEventListener('click', () => {
+            if (attempts >= 3) {
+                // Logic to display a random fact
+                const facts = [
+                    "Crocodiles are reptiles that belong to the family Crocodylidae.",
+                    "They can live for over 70 years in the wild.",
+                    "Crocodiles are carnivorous and primarily eat fish, birds, and mammals.",
+                    "They have powerful jaws that can exert a bite force of over 3,000 pounds per square inch.",
+                    "Crocodiles are ectothermic, meaning they rely on external sources to regulate their body temperature.",
+                    "They can hold their breath underwater for up to an hour while hunting.",
+                    "Crocodiles have a unique ability to see in the dark due to a special membrane in their eyes.",
+                    "They are found in tropical and subtropical regions around the world, primarily in freshwater habitats.",
+                    "Crocodiles communicate through a variety of vocalizations, including growls and hisses.",
+                    "The largest species of crocodile is the saltwater crocodile, which can grow up to 23 feet long."
+                ];
+                const randomFact = facts[Math.floor(Math.random() * facts.length)];
+                factDisplay.textContent = randomFact;
+            }
+        });
+    </script>
+</body>
+</html>
